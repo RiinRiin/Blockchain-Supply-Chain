@@ -8,10 +8,10 @@ import "../coffeecore/Ownable.sol";
 contract SupplyChain is Ownable, FarmerRole, DistributorRole, RetailerRole, ConsumerRole {
 
   // Define 'owner'
-  address owner;
+  // address owner;
 
   // Define a variable called 'upc' for Universal Product Code (UPC)
-  uint  upc;
+  // uint  upc;
 
   // Define a variable called 'sku' for Stock Keeping Unit (SKU)
   uint  sku;
@@ -68,10 +68,10 @@ contract SupplyChain is Ownable, FarmerRole, DistributorRole, RetailerRole, Cons
   event Purchased(uint upc);
 
   // Define a modifer that checks to see if msg.sender == owner of the contract
-  modifier onlyOwner() {
-    require(msg.sender == owner);
-    _;
-  }
+  // modifier onlyOwner() {
+  //   require(msg.sender == owner);
+  //   _;
+  // }
 
   // Define a modifer that verifies the Caller
   modifier verifyCaller (address _address) {
@@ -145,17 +145,17 @@ contract SupplyChain is Ownable, FarmerRole, DistributorRole, RetailerRole, Cons
   // and set 'sku' to 1
   // and set 'upc' to 1
   constructor() public payable {
-    owner = msg.sender;
+    // owner = msg.sender;
     sku = 1;
-    upc = 1;
+    // upc = 1;
   }
 
   // Define a function 'kill' if required
-  function kill() public {
-    if (msg.sender == owner) {
-      selfdestruct(owner);
-    }
-  }
+  // function kill() public {
+  //   if (msg.sender == owner) {
+  //     selfdestruct(owner);
+  //   }
+  // }
 
   // Define a function 'harvestItem' that allows a farmer to mark an item 'Harvested'
   function harvestItem(uint _upc, address _originFarmerID, string _originFarmName, string _originFarmInformation, string  _originFarmLatitude, string  _originFarmLongitude, string  _productNotes) public 
@@ -183,7 +183,7 @@ contract SupplyChain is Ownable, FarmerRole, DistributorRole, RetailerRole, Cons
   // Call modifier to check if upc has passed previous supply chain stage
 
   onlyFarmer
-  harvested(upc)
+  harvested(_upc)
 
   // Call modifier to verify caller of this function
   verifyCaller(items[_upc].originFarmerID)
@@ -219,7 +219,7 @@ contract SupplyChain is Ownable, FarmerRole, DistributorRole, RetailerRole, Cons
     items[_upc].productPrice = _price;
     items[_upc].itemState = State.ForSale;
     // Emit the appropriate event
-    emit ForSale(upc);
+    emit ForSale(_upc);
   }
 
   // Define a function 'buyItem' that allows the disributor to mark an item 'Sold'
